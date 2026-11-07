@@ -26,8 +26,9 @@ threaded-regions:
   threads: 2          # leave 1 thread for netty, GC and the OS
   scheduler: AFFINITY # enables Canvas' affinity scheduler
 chunk-system:
-  io-threads: 1
-  worker-threads: 1
+  io-threads: 1       # NVMe: 1 is enough; raise to 2 only if IO wait shows in spark
+  worker-threads: 1   # chunk gen/light; on 3 threads this is the one you share with regions
+  gen-parallelism: default
 ```
 
 Canvas affinity options: leave `enableAffinitySchedulerCpuAffinity: false` unless the host
@@ -55,3 +56,25 @@ simulation-distance=4
 ## JVM
 
 Use `scripts/start-economy.sh` (G1 with 2 parallel / 1 concurrent GC thread to fit 3 threads).
+
+## Chunk loading
+
+On 3 threads the biggest win is not generating chunks live. In order of impact:
+
+1. **Pregenerate** the world with Chunky out to the world border and set a border. Live generation
+   is by far the most expensive thing a small host does.
+2. **Cap per-player load rates** so one player exploring cannot starve everyone else
+   (`paper-global.yml`, keys under `chunk-loading-basic` / `chunk-loading-advanced`):
+   `player-max-chunk-load-rate`, `player-max-chunk-generate-rate`, `player-max-chunk-send-rate`,
+   `player-max-concurrent-chunk-loads`, `player-max-concurrent-chunk-generates`.
+   Start with load around 20, generate around 4, send around 40 and tune from spark.
+3. **View/simulation distance**: view 6-8, simulation 4. Each step costs roughly quadratic chunks per player.
+4. **Per-world** (`paper-world-defaults.yml`, `chunks`): keep `delay-chunk-unloads-by` at 10s or lower and
+   keep `max-auto-save-chunks-per-tick` low so autosaves do not spike a region tick.
+5. **Storage**: put the world on NVMe. `region-file-compression=lz4` in `server.properties` loads faster
+   than deflate at the cost of larger files (gameplay stays vanilla).
+6. Fork defaults already enable `FILTERED` fluid post-processing, which removes most of the stutter
+   when new chunks generate.
+
+Verify exact key names against the config files your build generates, since upstream Paper renames them
+occasionally.
