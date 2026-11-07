@@ -98,7 +98,7 @@ index 74ffdc823e66fc5ec027c4b7c462382bcbfe2be2..57c80795c551e0b03fa169c9a341fc0e
  
      private static final String BRAND_PAPER_NAME = "Paper";
 +    // Canvas start - Rebrand
-+    private static final String BRAND_CANVAS_NAME = "Canvas";
++    private static final String BRAND_CANVAS_NAME = "Bolia";
 +
 +    // private static final Key BRAND_CANVAS_ID = Key.key("canvasmc", "canvas");
 +    // private static final Key BRAND_FOLIA_ID = Key.key("papermc", "folia");
