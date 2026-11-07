@@ -224,10 +224,10 @@ public class WorldConfig extends Part {
                 ).greedyString();
         }
 
-        public boolean enableTpsBar = true;
+        public boolean enableTpsBar = false;
         public String tpsBarFormat = DEFAULT_TPSBAR_FORMAT;
 
-        public boolean enableRamBar = true;
+        public boolean enableRamBar = false;
         public String ramBarFormat = DEFAULT_RAMBAR_FORMAT;
     }
 
@@ -255,12 +255,12 @@ public class WorldConfig extends Part {
                 option("disableNewCombatParticles").docs("Note that when enabled this option breaks Vanilla visual compatibility");
             }
 
-            public boolean disableSprintParticles = false;
+            public boolean disableSprintParticles = true;
             public boolean disableFallParticles = false;
-            public boolean disableDeathParticles = false;
-            public boolean disableEffectParticles = false;
-            public boolean disableWaterSplashParticles = false;
-            public boolean disableBubbleColumnParticles = false;
+            public boolean disableDeathParticles = true;
+            public boolean disableEffectParticles = true;
+            public boolean disableWaterSplashParticles = true;
+            public boolean disableBubbleColumnParticles = true;
             public boolean disableNewCombatParticles = false;
         }
 
@@ -583,8 +583,8 @@ public class WorldConfig extends Part {
 
     public double waypointUpdateScale = 4000.0D;
     public boolean disableCriterionTrigger = false;
-    public boolean cactusCheckSurvivalBeforeGrowth = false;
-    public boolean enableSuffocationOptimization = false;
+    public boolean cactusCheckSurvivalBeforeGrowth = true;
+    public boolean enableSuffocationOptimization = true;
 
     public Sleeping sleeping = new Sleeping();
 

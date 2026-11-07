@@ -380,7 +380,7 @@ public class GlobalConfiguration extends Part {
 
         public long overloadedLogMillis = 5_000L;
         public float defaultTickRate = 20.0F;
-        public GuardSeverity guardSeverity = GuardSeverity.THROW;
+        public GuardSeverity guardSeverity = GuardSeverity.LOG;
 
         public enum GuardSeverity {
             SILENT,
@@ -420,7 +420,7 @@ public class GlobalConfiguration extends Part {
                 );
         }
 
-        public FluidPostProcessingMode fluidPostProcessingAlgorithm = FluidPostProcessingMode.VANILLA;
+        public FluidPostProcessingMode fluidPostProcessingAlgorithm = FluidPostProcessingMode.FILTERED;
 
         public enum FluidPostProcessingMode {
             VANILLA,
@@ -437,7 +437,7 @@ public class GlobalConfiguration extends Part {
                 );
         }
 
-        public boolean optimizeTreasureMapLocating = false;
+        public boolean optimizeTreasureMapLocating = true;
     }
 
     // TODO - check these on minecraft updates
@@ -531,11 +531,11 @@ public class GlobalConfiguration extends Part {
                 );
         }
 
-        public boolean filterVelocityPacket = false;
-        public boolean stripLoreFromEntityItems = false;
-        public boolean alternativePlayerListTick = false;
+        public boolean filterVelocityPacket = true;
+        public boolean stripLoreFromEntityItems = true;
+        public boolean alternativePlayerListTick = true;
         public int playerInfoSendInterval = 600;
-        public boolean purpurAlternativeKeepalive = false;
+        public boolean purpurAlternativeKeepalive = true;
 
         // Originally from Leaf: https://github.com/Winds-Studio/Leaf/blob/58a4a9cb7994474e63ba49205cd21e89f8dacc9a/leaf-server/minecraft-patches/features/0216-Flush-location-while-knockback.patch
         // License described in Leaf-Flush-location-while-knockback.patch
@@ -558,7 +558,7 @@ public class GlobalConfiguration extends Part {
 
     public boolean displayWorldLoadScreenForCrossRegionTransfers = true;
 
-    public boolean cacheMinecraft2BukkitEntityTypeConversion = false;
+    public boolean cacheMinecraft2BukkitEntityTypeConversion = true;
     public boolean tileEntitySnapshotCreation = false;
 
     public PurpurContainers purpurContainers = new PurpurContainers();
