@@ -582,7 +582,7 @@ public class GlobalConfiguration extends Part {
         }
 
         public int barrelRows = 3;
-        public boolean enderChestSixRows = false;
+        public boolean enderChestSixRows = true;
         public boolean enderChestPermissionRows = false;
         public boolean enderChestPersistHiddenRows = true;
     }
